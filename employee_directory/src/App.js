@@ -1,10 +1,10 @@
 import React from 'react';
-import SearchEmployeeContainer from "../src/components/SearchEmployeeContainer";
+import Search from "./components/Search.js";
 import './css/App.css';
 
 function App() {
   return (
-    <SearchEmployeeContainer />
+    <Search />
   );
 }
 
