@@ -11,21 +11,22 @@ class Search extends Component {
   state = {
     search: "",
     results: [],
+    filteredResults: [],
     error: ""
   };
 
   // When this component mounts, search the random user API for all results
   componentDidMount() {
     API.getRandomUser()
-      .then(res => this.setState({ results: res.data.results }))
+      .then(res => this.setState({ results: res.data.results, filteredResults: res.data.results}))
       .catch(err => console.log(err));
+      console.log("first render");
   }
 
-  // Search by name function will change results state to name entered
-  searchByName = () => {
-    API.getRandomUser()
-      .then(res => this.setState({ results: res.data }))
-      .catch(err => console.log(err));
+  // Filter our results that gives us back a new array of values that correspond to condition: any values equal to search value
+  searchByName = (searchValue) => {
+    const filteredResult = this.state.results.filter(employee => employee.name.last === searchValue);
+    this.setState({ filteredResults: filteredResult });
   };
 
   // When the user inputs a name, it changes the search state to this value
@@ -38,14 +39,12 @@ class Search extends Component {
 
   // When search button is clicked, change results to last name searched
   handleFormSubmit = event => {
+    event.preventDefault();
     if (this.state.search.trim() === "") {
+      this.setState({ filteredResults: this.state.results});
       return;
     }
-    let employees = this.state.result.filter(employee => employee.name.last);
-    this.setState({
-      result: employees
-    });
-    console.log(employees);
+    this.searchByName(this.state.search);
   };
 
 
@@ -56,11 +55,11 @@ class Search extends Component {
       <Row>
         <Col size="md-8">
           <Card title={"Employee Directory"}>
-            <EmployeesResults employees={this.state.results} />
+            <EmployeesResults employees={this.state.filteredResults} />
           </Card>
         </Col>
         <Col size="md-4">
-          <Card heading="Search" title={"Search"}>
+          <Card title={"Search"}>
             <SearchForm
               value={this.state.search}
               handleInputChange={this.handleInputChange}
