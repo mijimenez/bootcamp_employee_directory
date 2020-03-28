@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Nav from "./Nav";
 import Container from "./Container";
 import Row from "./Row";
 import Col from "./Col";
@@ -48,6 +49,24 @@ class Search extends Component {
     this.searchByName(this.state.search);
   };
 
+  // // Submit search With error message
+  // handleFormSubmit = event => {
+  //   event.preventDefault();
+  //   // If not in the array, log "no results"
+  //   if (!this.state.results.includes(this.state.search.trim())) {
+  //     this.setState({ filteredResults: this.state.results});
+  //     console.log("No Results");
+  //   }
+  //   // If input empty, display regular results
+  //   if (this.state.search.trim() === "") {
+  //     this.setState({ filteredResults: this.state.results});
+  //     console.log("Required Field");
+  //     return;
+  //   }
+  //   // Search array by searched term
+  //   this.searchByName(this.state.search);
+  // };
+
   // When sort up button is clicked, sort names alphabetically in ascending order
   handleSortUp = (event) => {
     const sortedUpResult = this.state.results.sort((a,b) => {
@@ -63,50 +82,49 @@ class Search extends Component {
   };
 
 
-    // When sort up button is clicked, sort names alphabetically in ascending order
-    handleSortDown = (event) => {
-      const sortedDownResult = this.state.results.sort((a,b) => {
-        const lastNameA = a.name.last;
-        const lastNameB = b.name.last;
-        if (lastNameA > lastNameB)
-          return -1;
-        if (lastNameA < lastNameB)
-          return 1;
-        return 0;
-      })
-      this.setState({ filteredResults: sortedDownResult });
-    };
+  // When sort up button is clicked, sort names alphabetically in ascending order
+  handleSortDown = (event) => {
+    const sortedDownResult = this.state.results.sort((a,b) => {
+      const lastNameA = a.name.last;
+      const lastNameB = b.name.last;
+      if (lastNameA > lastNameB)
+        return -1;
+      if (lastNameA < lastNameB)
+        return 1;
+      return 0;
+    })
+    this.setState({ filteredResults: sortedDownResult });
+  };
 
-
-
+  // Render all components
   render() {
     return (
-    <Container>
-      <Row>
-      <Col size="md-12">
-          <Card title={"Filter"}>
-            <Filter
-              handleSortUp={this.handleSortUp}
-              handleSortDown={this.handleSortDown}
-            />
-          </Card>
-        </Col>
-        <Col size="md-8">
-          <Card title={"Employee Directory"}>
-            <EmployeesResults employees={this.state.filteredResults} />
-          </Card>
-        </Col>
-        <Col size="md-4">
-          <Card title={"Search"}>
-            <SearchForm
-              value={this.state.search}
-              handleInputChange={this.handleInputChange}
-              handleFormSubmit={this.handleFormSubmit}
-            />
-          </Card>
-        </Col>
-      </Row>
-    </Container>
+    <div>
+      <Nav />
+      <Container>
+        <Row>
+          <Col size="md-12">
+            <Card title={"Search"} styles={"my-5"}>
+              <SearchForm
+                value={this.state.search}
+                handleInputChange={this.handleInputChange}
+                handleFormSubmit={this.handleFormSubmit}
+              />
+            </Card>
+          </Col>
+          <Col size="md-12">
+              <Card title={"Employee Directory"} styles={"mb-5"}>
+                <Filter
+                  handleSortUp={this.handleSortUp}
+                  handleSortDown={this.handleSortDown}
+                />
+                <EmployeesResults employees={this.state.filteredResults} />
+              </Card>
+          </Col>
+
+        </Row>
+      </Container>
+    </div>
     )};
 }
 
