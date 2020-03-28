@@ -5,6 +5,7 @@ import Col from "./Col";
 import Card from "./Card";
 import EmployeesResults from "./EmployeesResults";
 import SearchForm from "./SearchForm";
+import Filter from "./Filter";
 import API from "../utils/API";
 
 class Search extends Component {
@@ -37,7 +38,7 @@ class Search extends Component {
     });
   };
 
-  // When search button is clicked, change results to last name searched
+  // When search button is clicked, grab the search term and filter the random users into filtered array by results pertaining to that property, in this case the last name.
   handleFormSubmit = event => {
     event.preventDefault();
     if (this.state.search.trim() === "") {
@@ -47,12 +48,49 @@ class Search extends Component {
     this.searchByName(this.state.search);
   };
 
+  // When sort up button is clicked, sort names alphabetically in ascending order
+  handleSortUp = (event) => {
+    const sortedUpResult = this.state.results.sort((a,b) => {
+      const lastNameA = a.name.last;
+      const lastNameB = b.name.last;
+      if (lastNameB > lastNameA)
+        return -1;
+      if (lastNameB < lastNameA)
+        return 1;
+      return 0;
+    })
+    this.setState({ filteredResults: sortedUpResult });
+  };
+
+
+    // When sort up button is clicked, sort names alphabetically in ascending order
+    handleSortDown = (event) => {
+      const sortedDownResult = this.state.results.sort((a,b) => {
+        const lastNameA = a.name.last;
+        const lastNameB = b.name.last;
+        if (lastNameA > lastNameB)
+          return -1;
+        if (lastNameA < lastNameB)
+          return 1;
+        return 0;
+      })
+      this.setState({ filteredResults: sortedDownResult });
+    };
+
 
 
   render() {
     return (
     <Container>
       <Row>
+      <Col size="md-12">
+          <Card title={"Filter"}>
+            <Filter
+              handleSortUp={this.handleSortUp}
+              handleSortDown={this.handleSortDown}
+            />
+          </Card>
+        </Col>
         <Col size="md-8">
           <Card title={"Employee Directory"}>
             <EmployeesResults employees={this.state.filteredResults} />
