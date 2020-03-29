@@ -5,7 +5,7 @@ A React application that is built with stateful components, which allows a user 
 
 ## Screenshot of Application
 
-![Desktop](./employee_directory/public/gifs/demo.gif)
+![Desktop](./public/gifs/demo.gif)
 
 ## Live Link
 Launch the application [here](---)
