@@ -14,7 +14,7 @@ Launch the application [here](---)
 - HTML5
 - CSS3 (Sass/Bootstrap)
 - JavaScript
-- React
+- React.js
 
 ## Features
 - Search employees by last name
