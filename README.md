@@ -8,7 +8,7 @@ A React application that is built with stateful components, which allows a user 
 ![Desktop](./public/gifs/demo.gif)
 
 ## Live Link
-Launch the application [here](---)
+Launch the application [here](https://jimenez-employee-directory-001.herokuapp.com/)
 
 ## Technologies Used
 - HTML5
