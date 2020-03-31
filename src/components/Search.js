@@ -40,32 +40,32 @@ class Search extends Component {
   };
 
   // When search button is clicked, grab the search term and filter the random users into filtered array by results pertaining to that property, in this case the last name.
-  handleFormSubmit = event => {
-    event.preventDefault();
-    if (this.state.search.trim() === "") {
-      this.setState({ filteredResults: this.state.results});
-      return;
-    }
-    this.searchByName(this.state.search);
-  };
-
-  // // Submit search With error message
   // handleFormSubmit = event => {
   //   event.preventDefault();
-  //   // If not in the array, log "no results"
-  //   if (!this.state.results.includes(this.state.search.trim())) {
-  //     this.setState({ filteredResults: this.state.results});
-  //     console.log("No Results");
-  //   }
-  //   // If input empty, display regular results
   //   if (this.state.search.trim() === "") {
   //     this.setState({ filteredResults: this.state.results});
-  //     console.log("Required Field");
   //     return;
   //   }
-  //   // Search array by searched term
   //   this.searchByName(this.state.search);
   // };
+
+  // Submit search With error message
+  handleFormSubmit = event => {
+    event.preventDefault();
+    // If not in the array, log "no results"
+    if (!this.state.results.includes(this.state.search.trim())) {
+      this.setState({ filteredResults: "No Results"});
+      console.log("No Results");
+    }
+    // If input empty, display regular results
+    if (this.state.search.trim() === "") {
+      this.setState({ filteredResults: this.state.results});
+      console.log("Required Field");
+      return;
+    }
+    // Search array by searched term
+    this.searchByName(this.state.search);
+  };
 
   // When sort up button is clicked, sort names alphabetically in ascending order
   handleSortUp = (event) => {
