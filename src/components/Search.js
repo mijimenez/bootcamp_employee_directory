@@ -49,24 +49,6 @@ class Search extends Component {
     this.searchByName(this.state.search);
   };
 
-  // Submit search With error message
-  // handleFormSubmit = event => {
-  //   event.preventDefault();
-  //   // If not in the array, log "no results"
-  //   if (!this.state.results.includes(this.state.search.trim())) {
-  //     this.setState({ filteredResults: "No Results"});
-  //     console.log("No Results");
-  //   }
-  //   // If input empty, display regular results
-  //   if (this.state.search.trim() === "") {
-  //     this.setState({ filteredResults: this.state.results});
-  //     console.log("Required Field");
-  //     return;
-  //   }
-  //   // Search array by searched term
-  //   this.searchByName(this.state.search);
-  // };
-
   // When sort up button is clicked, sort names alphabetically in ascending order
   handleSortUp = (event) => {
     const sortedUpResult = this.state.results.sort((a,b) => {
@@ -80,7 +62,6 @@ class Search extends Component {
     })
     this.setState({ filteredResults: sortedUpResult });
   };
-
 
   // When sort up button is clicked, sort names alphabetically in ascending order
   handleSortDown = (event) => {
