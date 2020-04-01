@@ -118,7 +118,11 @@ class Search extends Component {
                   handleSortUp={this.handleSortUp}
                   handleSortDown={this.handleSortDown}
                 />
-                <EmployeesResults employees={this.state.filteredResults} />
+                {!this.state.filteredResults.length ? (
+                  <h3 className="text-center">No Results to Display</h3>
+                ) : (
+                  <EmployeesResults employees={this.state.filteredResults} />
+                )}
               </Card>
           </Col>
 
